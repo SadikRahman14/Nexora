@@ -2,9 +2,10 @@
   "name": "nexora",
   "version": "1.0.0",
   "description": "An approach to learn backend",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
   "keywords": [
     "\"Approach\""
@@ -14,5 +15,11 @@
   "devDependencies": {
     "nodemon": "^3.1.10",
     "prettier": "^3.6.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0"
   }
+
 }
