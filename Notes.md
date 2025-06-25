@@ -13,3 +13,46 @@ Git does not keep a track of empty folders. We need to add a .gutkeep file in th
 ```bash
 touch .controllers/.gitleep
 ```
+
+## 📦 Connecting Database
+
+**Always use try catch** 
+ 
+ **The database is at another continent, So always use async await**
+
+ ```js
+const connectDB = async () => {
+    try {
+        const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
+        console.log(`\n MongoDB Connected !! DB host : ${connectionInstance.connection.host}`);
+    } catch (error) {
+        console.log("MongoDB Connection Error", error);
+        process.exit(1);
+    }
+}
+ ```
+
+ **Always put a semi before starting IIFE(Immediately Invoked Function Expression)**
+
+
+### process.exit()
+***Process is basically running instance of a program, Represenets the corrent operation in node.js***
+
+>***process.exit(0)*** **means no error**
+
+>***process.exit(1)*** **means general error(database failure etc.)**
+
+
+### ConnectionInstance.connection()
+>**When you call mongoose.connect(), it returns a promise that resolves to the Mongoose instance itself (which is also a connection object).**
+
+#### **.connection() provides properties like :**
+>.host — The hostname of the MongoDB server you're connected to.
+
+>.port — The port number.
+
+>.name — The database name.
+
+>.readyState — The state of the connection (connected, disconnected, connecting, etc).
+
+>.on() — To listen to connection events like errors, disconnected, connected, etc.
