@@ -1,0 +1,14 @@
+{
+  "name": "nexora",
+  "version": "1.0.0",
+  "description": "An approach to learn backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "\"Approach\""
+  ],
+  "author": "Sadik Rahman",
+  "license": "ISC"
+}
