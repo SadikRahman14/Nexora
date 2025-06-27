@@ -22,4 +22,14 @@ app.use(express.static("public")) // This allows you to serve things like images
 app.use(cookieParser());
 
 
+// import routers
+import userRouter from "./routes/user.routes.js"
+
+app.use("/api/v1/users", userRouter);
+
+/*
+    http://localhost:8000/api/v1/users/register
+    We are using users/ path and giving it to userRouter which has a path to register
+*/
+
 export { app }
