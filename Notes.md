@@ -131,17 +131,17 @@ const storage = multer.diskStorage({
 })
 ```
 
-🧩 What Happens When You Call cb(...)?
-Internally:
+**🧩 What Happens When You Call cb(...)?
+Internally:**
 
-Multer collects all upload info (file type, field name, etc.)
+>Multer collects all upload info (file type, field name, etc.)
 
-Calls your custom destination() and filename() functions
+>Calls your custom destination() and filename() functions
 
-When you call cb(...), it saves the file using:
+>When you call cb(...), it saves the file using:
 
-The path you gave in destination
+>The path you gave in destination
 
-The name you gave in filename
+>The name you gave in filename
 
-If you call cb(err) instead, the upload is aborted with an error.
+>If you call cb(err) instead, the upload is aborted with an error.
