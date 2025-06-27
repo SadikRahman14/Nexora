@@ -1,6 +1,8 @@
 # Developer Notes
 
-## 📦 Installing Development-Only Dependencies
+
+## <p align="center">📦 Installing Development-Only Dependencies</p>
+
 
 To install a package only for development (i.e., not required in production), use the `-D` or `--save-dev` flag:
 
@@ -13,8 +15,9 @@ Git does not keep a track of empty folders. We need to add a .gutkeep file in th
 ```bash
 touch .controllers/.gitleep
 ```
+<br><br><br>
+## <p align="center">📦 Connecting Database</p>
 
-## 📦 Connecting Database
 
 **Always use try catch** 
  
@@ -61,8 +64,9 @@ const connectDB = async () => {
 
 
 
+<br><br><br>
+## <p align="center">Access Token and Refresh Token</p>
 
-## Access Token and Refresh Token
 
 ✅ Access Token
 A short-lived token (e.g., expires in 15 minutes).
@@ -112,8 +116,9 @@ userSchema.methods.generateRefreshToken = function(){
     )
 }
 ```
+<br><br><br>
+## <p align="center">Callback of Multer</p>
 
-## Callback of Multer
 ```js
 const storage = multer.diskStorage({
     destination: function (req, file, cb){
