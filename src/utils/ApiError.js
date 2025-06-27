@@ -5,7 +5,7 @@ class ApiError extends Error{
         errors = [],
         statck = ""
     ){
-        super(message)
+        super(message) // This calls the parent (Error) constructor so that message gets registered as the error's message.
         this.statusCode = statusCode
         this.data = null
         this.message = message
