@@ -144,4 +144,77 @@ Internally:**
 
 >The name you gave in filename
 
->If you call cb(err) instead, the upload is aborted with an error.
+>If you call cb(err) instead, the upload is aborted with an error.  
+
+<br><br><br>
+## <p align="center">HTTP Headers</p>
+**1.Request Header - from client  
+2. Response header - from server  
+3. Representation header - encoding/compression  
+4. Playload header - data**
+<br><br><br>
+## <p align="center">HTTP Requests</p>  
+
+| Method | Action | 
+|----------|----------|
+|  GET   |  Fetch Data (retrive and resource)  | 
+|  POST    |  Create a new resource on the server  | 
+| PUT    | Replace an existing resource completely  | 
+| PATCH    |   Partially update a resource | 
+| DELETE    | Delete a resource.  |
+| HEAD   | Same as GET, but only returns headers — no body  |
+| OPTIONS    |  Returns the allowed HTTP methods for a resource (CORS preflight)  |
+|  TRACE  | Debugging — echoes back the received request |
+<br><br>
+## <p align="center">🌐 HTTP Status Codes Cheat Sheet</p>  
+
+## 1xx – Informational
+
+>100	    Continue	Client can continue with request
+
+>101	Switching Protocols	Server agrees to switch protocols (e.g., HTTP to WebSocket)
+
+ ## 2xx – Success
+
+>200	OK	Successful request
+
+>201	Created	Resource created successfully
+
+>202	Accepted	Request accepted, processing later
+
+>204	No Content	Success, but no content returned
+
+## 3xx – Redirection
+
+>301	Moved Permanently	Resource has moved to a new URL
+
+>302	Found	Temporary redirect to another URL
+
+>304	Not Modified	Cached version is still valid
+
+## 4xx – Client Errors
+
+>400	Bad Request	Malformed syntax / Invalid input
+
+>401	Unauthorized	Auth required (missing/invalid token)
+
+>403	Forbidden	Access denied even if authenticated
+
+>404	Not Found	Resource doesn’t exist
+
+>405	Method Not Allowed	HTTP method not supported by the route
+
+>409	Conflict	Duplicate or conflicting resource
+
+>422	Unprocessable Entity	Validation error (common in APIs)
+
+## 5xx – Server Errors
+>500	Internal Server Error	Generic server error
+
+>501	Not Implemented	Method not supported by server
+
+>502	Bad Gateway	Invalid response from upstream server
+
+>503	Service Unavailable	Server is down or overloaded
+
+>504	Gateway Timeout	Upstream server didn’t respond in time
