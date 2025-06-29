@@ -11,6 +11,8 @@ class ApiResponse{
     }
 }
 
+export { ApiResponse }
+ 
 /*
     HTTP status code:   
     Informational responses (100 – 199)
