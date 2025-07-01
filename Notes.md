@@ -223,3 +223,9 @@ Internally:**
 >503	Service Unavailable:	Server is down or overloaded
 
 >504	Gateway: Timeout	Upstream server didn’t respond in time
+
+<br><br>
+## <p align="center"> Subscribed - Subscriber</p>
+![Note](https://imgur.com/a/diPtb7K)
+
+
