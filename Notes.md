@@ -226,6 +226,29 @@ Internally:**
 
 <br><br>
 ## <p align="center"> Subscribed - Subscriber</p>
-![Note](https://imgur.com/a/diPtb7K)
+![Note](https://i.imgur.com/pK8gZSB.png)
+
+```js
+import mongoose, {Schema} from "mongoose"
+
+const subscriptionSchema = new Schema({
+    subscriber: {
+        type: Schema.Types.ObjectId,
+        ref: "User" // One who is subscribing
+    },
+    channel: {
+        type: Schema.Types.ObjectId,
+        ref: "User" // Owner of the channel      
+    }
+},{timestamps: true})
+
+export const Subscription = mongoose.model("Subscription", subscriptionSchema);
+```
+In Subscription Schema There is two component: Channel and Subscribers
+
+If a subscribes to CAC then it will make a new document in databsae as given in image
+And while counting number of Suscriber of a channel, we will count in how many document has CAC as channel
+And while counting how many channels a user subscribed we will count how many document has that user as sbscriber
+
 
 
