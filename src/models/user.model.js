@@ -2,6 +2,10 @@ import mongoose, {Schema} from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
+const ACCESS_TOKEN_EXPIRY = process.env.ACCESS_TOKEN_EXPIRY || "15m";
+const REFRESH_TOKEN_EXPIRY = process.env.REFRESH_TOKEN_EXPIRY || "7d";
+
 const userSchema = new Schema(
     {
         username:{
@@ -59,7 +63,8 @@ userSchema.pre("save", async function(next) {
 })
 
 userSchema.methods.isPasswordCorrect = async function(password){
-    return await bcrypt.compare(this.password, password);
+    
+    return await bcrypt.compare(password, this.password);
     // this.password is from database
 }
 

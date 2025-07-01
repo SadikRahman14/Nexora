@@ -4,16 +4,17 @@ import {User} from "../models/user.model.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+
 const registerUser = asyncHandler( async(req, res) => {
     // get user details from frontend
 
     const {fullName, email, username, password} = req.body
-    /*
+/*
         "Hey Express, if the incoming request has a JSON body, please parse it and attach 
         it as an object to req.body."
 
         Extracting these parameters from user input to req.body
-    */
+*/
     console.log("email", email)
 
     // validation not empty
@@ -43,7 +44,7 @@ const registerUser = asyncHandler( async(req, res) => {
     //const coverImageLocalPath = req.files?.coverImage[0].path;
 
     // If we dont add coverImage:
-    /*
+/*
         <body>
             <pre>TypeError: Cannot read properties of undefined (reading &#39;0&#39;)<br> 
         </body>
@@ -51,15 +52,15 @@ const registerUser = asyncHandler( async(req, res) => {
         If no coverImage is uploaded, then:
         req.files?.coverImage is undefined
         So req.files?.coverImage[0] becomes undefined[0] → 💥 Error
-    */
+*/
 
     let  coverImageLocalPath;
     if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
         coverImageLocalPath = req.files.coverImage[0].path
     }
-    // this fixes cover image issue
+// this fixes cover image issue
     
-    /*
+/*
     console.log(req.files);
         avatar: [
             {
@@ -73,10 +74,9 @@ const registerUser = asyncHandler( async(req, res) => {
                 size: 2539567```
             }
      ],
-    */
+*/
    
-
-    /*
+/*
         If an avatar file was uploaded, get its local file path
 
         req.files - an object automatically populated by multer. Contains files grouped by field name
@@ -88,7 +88,7 @@ const registerUser = asyncHandler( async(req, res) => {
         So take the first one
 
         .path => The local path on your server where file was saved by multer
-    */
+*/
 
     if(!avatarLocalPath){
         throw new ApiError(400, "Avatar is required");
@@ -150,4 +150,142 @@ const registerUser = asyncHandler( async(req, res) => {
     */
 })
 
-export {registerUser}
+const generateAccessAndRefreshToken = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    return { accessToken, refreshToken };
+  } catch (error) {
+    console.error("generateAccessAndRefreshToken error:", error);
+    throw new ApiError(500, "Something went wrong");
+  }
+};
+
+
+
+const loginUser = asyncHandler(async(req, res) => {
+    // fetch the body from data
+    const {email, username, password} = req.body;
+
+    // username or email, let user login if they have any of this
+    if (!username && !email) {
+        throw new ApiError(400, "username or email is required")
+    }
+
+    // find the user by username or email
+    const user = await User.findOne({
+        $or: [{username},{email}]
+    })
+
+    // Check if user exists
+    if(!user){
+        throw new ApiError(404, "User does not exists")
+    }
+
+    // password check
+    const isPasswordValid = await user.isPasswordCorrect(password)
+
+    if(!isPasswordValid){
+        throw new ApiError(401,"Invalid User Credentials");
+    }
+
+    // provide accessToken and refreshToken
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id);
+
+    // Just show what they need
+    const loggedInUser = await User.findById(user._id)
+    .select("-password -refreshToken")
+
+
+    // send cookies
+    const options = {
+        httpOnly: true, //  prevent client-side JS from accessing cookies
+        secure: true // cookie only sent over HTTPS (set false in dev if needed)
+        
+    }
+
+
+    // Send Response
+    return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+        new ApiResponse(
+            200,
+            {
+                user: loggedInUser, accessToken, refreshToken
+            },
+            "User logged in Successfully"
+        )
+    )
+    /*
+        Reason of sending data twice is, the json response is for us to see in postman
+        {
+            statusCode: 200,
+            data: {
+                user: { ... },            // user info (without password or refresh token)
+                accessToken: "xyz",       // short-lived token
+                refreshToken: "abc"       // long-lived token
+            },
+            message: "User logged in Successfully",
+            success: true
+        }
+
+    */
+
+
+
+})
+
+const logoutUser = asyncHandler(async(req, res) => {
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                refreshToken: undefined
+                /*
+                    setting the refreshToken field to undefined, effectively removing it
+                    This is important because the refresh token is stored in the DB (server-side), 
+                    and removing it invalidates any future token refresh attempts 
+                */
+            }
+        },
+        {new : true}
+        /*
+            In Mongoose, when you use update methods like:
+            findByIdAndUpdate()
+            findOneAndUpdate()
+            Mongoose by default returns the original (pre-update) document.
+            To get the updated version instead, you pass: {new : true}
+
+            Here, To get the version after updating refreshToken
+        */
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res.status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged out successfully"))
+})
+
+export {
+    registerUser,
+    loginUser,
+    logoutUser
+}
