@@ -4,6 +4,7 @@ import {User} from "../models/user.model.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 
 const registerUser = asyncHandler( async(req, res) => {
@@ -293,7 +294,7 @@ const logoutUser = asyncHandler(async(req, res) => {
         req.user._id,
         {
             $set:{
-                refreshToken: undefined
+                refreshToken: 1
                 /*
                     setting the refreshToken field to undefined, effectively removing it
                     This is important because the refresh token is stored in the DB (server-side), 
@@ -640,7 +641,7 @@ const getWatcHistory = asyncHandler( async(req, res) => {
     .json(
         new ApiResponse(
             200,
-            user[0].watchHostory,
+            user[0].watchHistory,
             "Watch History fetched Successfully"
         )
     )
