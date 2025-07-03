@@ -575,13 +575,33 @@ const getWatcHistory = asyncHandler( async(req, res) => {
             $match: {
                 _id: new mongoose.Types.ObjectId(req.user._id)
             }
+            /*
+                req.user._id is typically a string extracted from the JWT after login.
+                But MongoDB _id fields are of type ObjectId, not plain strings.
+                So we convert the string _id to a valid ObjectId
+                Important****
+            */
         },
         {
+            /*
+                This lookup occurs knowing thats user already seen some video and they are in watch history
+                {
+                    _id: ObjectId("user123"),
+                    watchHistory: [
+                        ObjectId("video1"),
+                        ObjectId("video2"),
+                        ...
+                    ]
+                }
+            */
             $lookup: {
                 from: "videos",
                 localField: "watchHistory",
                 foreignField: "_id",
                 as: "watchHistory",
+                /*
+                    its kind of from video schema take video id and put it inside watch history
+                */
                 pipeline: [
                     {
                         $lookup:{
@@ -589,6 +609,10 @@ const getWatcHistory = asyncHandler( async(req, res) => {
                             localField: "owner",
                             foreignField: "_id",
                             as: "owner",
+                            /*
+                                Another join video.owner = users._id
+                                Grabs User info like fullName, username, avatar and store them in owner
+                            */
                             pipeline:[{
                                 $project:{
                                     fullName: 1,
@@ -604,6 +628,7 @@ const getWatcHistory = asyncHandler( async(req, res) => {
                                 $first: "$owner"
                             }
                         }
+                        // To get the first owner
                     }
                 ]
             }
