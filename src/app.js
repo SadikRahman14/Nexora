@@ -24,8 +24,10 @@ app.use(cookieParser());
 
 // import routers
 import userRouter from "./routes/user.routes.js"
+import healthCheckRoutes from "./routes/healthcheck.route.js"
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1", healthCheckRoutes);
 
 /*
     http://localhost:8000/api/v1/users/register
