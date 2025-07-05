@@ -42,6 +42,7 @@ router.route("/update-account").patch(verifyJWT, updateAccountDetails)
 
 router.route("/avatar").patch(verifyJWT, upload.single("avatar"), updateUserAvatar)
 router.route("/cover-image").patch(verifyJWT, upload.single("coverImage"), updateCoverImage)
+
 /*
     When you do upload.single("avatar"), you're telling multer:
         "Expect one file upload with the form field named 'avatar'."
