@@ -29,6 +29,7 @@ import tweetRouter from "./routes/tweet.route.js"
 import dashboardRouter from "./routes/dashboard.route.js"
 import videoRouter from "./routes/video.route.js"
 import commentRouter from "./routes/comments.route.js"
+import likeController from "./routes/like.route.js"
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1", healthCheckRoutes);
@@ -36,6 +37,8 @@ app.use("/api/v1/tweets", tweetRouter);
 app.use("/api/v1/dashboard", dashboardRouter);
 app.use("/api/v1/video", videoRouter); 
 app.use("/api/v1/comment", commentRouter);
+app.use("/api/v1/like", likeController);
+
 
 /*
     http://localhost:8000/api/v1/users/register

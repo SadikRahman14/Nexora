@@ -7,8 +7,6 @@ import { User } from "../models/user.model.js"
 import { Video } from "../models/video.model.js"
 
 
-
-
 const getVideoComments = asyncHandler(async (req, res) => {
     //TODO: get all comments for a video
     // Handle the variables

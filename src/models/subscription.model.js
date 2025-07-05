@@ -7,7 +7,7 @@ const subscriptionSchema = new Schema({
     },
     channel: {
         type: Schema.Types.ObjectId,
-        ref: "User" // Owner iof channel      
+        ref: "User" // Owner of channel      
     }
 },{timestamps: true})
 
