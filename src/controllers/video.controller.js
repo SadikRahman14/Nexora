@@ -5,11 +5,11 @@ import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
-import { getVideoDuration } from "../utils/getVideoDuration.js"
+import { response } from "express"
 
 
 const getAllVideos = asyncHandler(async (req, res) => {
-    const { page = 1, limit = 10, query, sortBy = "createdAt", sortType = "desc", userId } = req.query
+    let { page = 1, limit = 10, query, sortBy = "createdAt", sortType = "desc", userId } = req.query
 /*
     This is called destructuring. It takes specific fields from the req.query object 
     (which holds URL query parameters).
@@ -39,6 +39,9 @@ const getAllVideos = asyncHandler(async (req, res) => {
             { description: {$regex: query, $options: "i"}}
         ]
     }
+
+    //$regex: Regular expression — for partial matches.
+
     if(userId){
         filter.owner = userId;
     }
@@ -56,7 +59,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
     const sort = {};
     sort[sortBy] = sortType === "desc" ? -1 : 1;
 /*
-    1 means desc and -1 means asc
+    -1 means desc and 1 means asc
 */
 
     const videos = await Video.find(filter)
@@ -171,15 +174,123 @@ const updateVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
     //TODO: update video details like title, description, thumbnail
 
+    // Fetch the vido id of the video, user wants to change
+    // Validate Video
+    // check if the user is the owner of the video
+    // Fetch title, thumbnail, description from user
+    // thumbnail
+    // Send error if none of the field changed
+    // Update the fields
+    // Return Response
+
+
+    const video = await Video.findById(videoId);
+
+    if(!video){
+        throw new ApiError(404, "Video Not Found");
+    }
+
+    if(video.owner.toString() !== req.user?._id.toString()){
+        throw new ApiError(403, "You are not authorized to update this video")
+    }
+
+    const previousTitle = video.title;
+    const previousDescription = video.description;
+    const previousThumbnail = video.thumbnail;
+
+    const { title, description } = req.body;
+
+    const thumbnailLocalPath = req.file?.path;
+
+    if(!(title || description || thumbnailLocalPath)){
+        throw new ApiError(400, "You are not updating anything")
+    }
+
+
+    let newThumbnail = video.thumbnail;
+    if(thumbnailLocalPath){
+        const thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
+        newThumbnail = thumbnail?.url || video.thumbnail
+        // OR operators takes the first value if none of them are null
+    }
+
+
+    const updatedVideo = await Video.findByIdAndUpdate(
+        videoId,
+        {
+            title: (title === "")? previousTitle : title,
+            description: (description === "") ? previousDescription : description,
+            thumbnail: newThumbnail,
+
+        },
+        { new : true }
+    )
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, updatedVideo, "Details updated Successfully")
+    )
+
 })
 
 const deleteVideo = asyncHandler(async (req, res) => {
     const { videoId } = req.params
-    //TODO: delete video
+    // TODO: delete video
+    // Get the video by videoId
+    // find in database and delete
+    // return response
+
+    
+
+    const video = await Video.findById(videoId);
+
+    if(!video){
+        throw new ApiError(404, "Video Not Found");
+    }
+
+    if(video.owner.toString() !== req.user?._id.toString()){
+        throw new ApiError(403, "You are not authorized to delete this video")
+    }
+
+    await Video.deleteOne(video);
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, {}, "Video deleted Successfully")
+    )
+
 })
 
 const togglePublishStatus = asyncHandler(async (req, res) => {
     const { videoId } = req.params
+
+    // TODO: delete video
+    // Get the video by videoId
+    // find in database and toggle the status (default is true)
+    // return response
+
+    const video = await Video.findById(videoId);
+
+    if(!video){
+        throw new ApiError(404, "Video Not Found");
+    }
+
+    if(video.owner.toString() !== req.user?._id.toString()){
+        throw new ApiError(403, "You are not authorized to change status of this video")
+    }
+
+    video.isPublished = !video.isPublished;
+    await video.save();
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, video, "Status Toggled Successfully")
+    )
+
+
 })
 
 export {
