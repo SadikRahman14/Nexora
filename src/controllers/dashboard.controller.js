@@ -8,6 +8,11 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 
 const getChannelStats = asyncHandler(async (req, res) => {
     // TODO: Get the channel stats like total video views, total subscribers, total videos, total likes etc.
+    // Get video views from VideoSchema
+    // Get total Subscriber from SubscriptionSchema
+    // Get total Videos from VideoSchema
+    // Get total Likes from ......
+    // Return in a response
 })
 
 const getChannelVideos = asyncHandler(async (req, res) => {
@@ -17,4 +22,4 @@ const getChannelVideos = asyncHandler(async (req, res) => {
 export {
     getChannelStats, 
     getChannelVideos
-    }
+}
