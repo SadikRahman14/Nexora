@@ -8,8 +8,6 @@ import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import { response } from "express"
 
 
-
-
 const getAllVideos = asyncHandler(async (req, res) => {
     let { page = 1, limit = 10, query, sortBy = "createdAt", sortType = "desc", userId } = req.query
 /*
