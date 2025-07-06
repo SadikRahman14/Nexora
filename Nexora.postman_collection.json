@@ -1,0 +1,943 @@
+{
+	"info": {
+		"_postman_id": "e97202b0-c437-44c5-a86a-8008bbed2107",
+		"name": "Nexora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41721508"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "mamtomamto",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "E-mamto",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mamto@example.com",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/Shadows.png"
+								},
+								{
+									"key": "coverImage",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/462579138_1891135081414413_3058054888612499563_n.jpg"
+								},
+								{
+									"key": "password",
+									"value": "cycle_mamto",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"email\": \"sadik@example.com\", \r\n    \"password\": \"sadik\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/logout",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserDetails",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\" : \"vcvcvcv\",\r\n    \"email\": \"hobeki@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/update-account",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"update-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\" : \"sadik\",\r\n    \"newPassword\" : \"kidas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/users/change-password",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeAvatar",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/Sadik Rahman_20220104104(C1).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/users/avatar",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeCoverImage",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/cover-image",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"cover-image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "watchHistory",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/history",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserChannel",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/users/c/sadikrahman14",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"users",
+								"c",
+								"sadikrahman14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "healthCheck",
+			"item": [
+				{
+					"name": "health-check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/health-check",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"health-check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tweets",
+			"item": [
+				{
+					"name": "create-tweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Make America Great Again!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/tweets/create-tweet",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweets",
+								"create-tweet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-tweets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/tweets/get-user-tweet/sadikrahman14",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweets",
+								"get-user-tweet",
+								"sadikrahman14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-tweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Please Don't Make America Anything\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/tweets/update-tweet/6866900431b613353d99b486",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweets",
+								"update-tweet",
+								"6866900431b613353d99b486"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/tweets/delete-tweet/686690618d6be8c1a03164e3",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"tweets",
+								"delete-tweet",
+								"686690618d6be8c1a03164e3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "video",
+			"item": [
+				{
+					"name": "publish video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Better Call Saul",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Damn the series",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Pictures/Camera Roll/ContentOne.mp4"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/Sadik Rahman_20220104104(C1).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/video/publish-video",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"video",
+								"publish-video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Video",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/video/get-video/6868b63e197f008acad8d56b",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"video",
+								"get-video",
+								"6868b63e197f008acad8d56b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "BAD AS BREAK",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Not suitable",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Pictures/Chess002.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/video/update-video/6868b63e197f008acad8d56b",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"video",
+								"update-video",
+								"6868b63e197f008acad8d56b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Video",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/video/delete-video/6868baebf7e9cd35feee0e36",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"video",
+								"delete-video",
+								"6868baebf7e9cd35feee0e36"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle Publish status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get all videos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/video/get-all-videos",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"video",
+								"get-all-videos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "watch video",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "post comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\" : \"BB was better\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comment/post-comment",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"post-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Piece of Papaer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/comment/update-comment/686903a19a103c953edf3c32",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"comment",
+								"update-comment",
+								"686903a19a103c953edf3c32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get video comments",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "like",
+			"item": [
+				{
+					"name": "toggle video like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/like/like-video/6868f38372f2b4299be5a420",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"like-video",
+								"6868f38372f2b4299be5a420"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle comment like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/like/like-comment/686903a19a103c953edf3c32",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"like-comment",
+								"686903a19a103c953edf3c32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle tweet like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/like//like-tweet/6866900431b613353d99b486",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"like",
+								"",
+								"like-tweet",
+								"6866900431b613353d99b486"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get liked videos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscription",
+			"item": [
+				{
+					"name": "toggle subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/subscription/toggle-subscription/6863c1529ef82527aba7689b",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"subscription",
+								"toggle-subscription",
+								"6863c1529ef82527aba7689b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get channel subscriber",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get subscribed channels",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "playlist",
+			"item": [
+				{
+					"name": "create-playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DP Playlist\",\r\n    \"description\": \"A Playlist to master at DP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/crate-playlist",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"crate-playlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user playlist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DP Playlist\",\r\n    \"description\": \"A Playlist to master at DP\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/playlist/get-user-playlist/6863c0c59ef82527aba76897",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"get-user-playlist",
+								"6863c0c59ef82527aba76897"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get playlist by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "add video to playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DP Playlist\",\r\n    \"description\": \"A Playlist to master at DP\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/playlist/add-to-playlist/686959f4b0a305037c1877ab/add/6868f38372f2b4299be5a420",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"add-to-playlist",
+								"686959f4b0a305037c1877ab",
+								"add",
+								"6868f38372f2b4299be5a420"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove video",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"DP Playlist\",\r\n    \"description\": \"A Playlist to master at DP\"\r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/playlist/remove-from-playlist/686959f4b0a305037c1877ab/add/6868f38372f2b4299be5a420",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"remove-from-playlist",
+								"686959f4b0a305037c1877ab",
+								"add",
+								"6868f38372f2b4299be5a420"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update playlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JS Playlist\"\r\n    //\"description\": \"A Playlist to master at JS\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server}}/playlist/update-playlist/68695a0cb0a305037c1877b1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"update-playlist",
+								"68695a0cb0a305037c1877b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete playlist",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JS Playlist\"\r\n    //\"description\": \"A Playlist to master at JS\" \r\n}"
+						},
+						"url": {
+							"raw": "{{server}}/playlist/delete-playlist/68695a01b0a305037c1877ae",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"playlist",
+								"delete-playlist",
+								"68695a01b0a305037c1877ae"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "get channel stats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get users videos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
