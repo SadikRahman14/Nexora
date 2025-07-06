@@ -9,6 +9,7 @@ import { response } from "express"
 
 
 
+
 const getAllVideos = asyncHandler(async (req, res) => {
     let { page = 1, limit = 10, query, sortBy = "createdAt", sortType = "desc", userId } = req.query
 /*
@@ -294,11 +295,50 @@ const togglePublishStatus = asyncHandler(async (req, res) => {
 
 })
 
+const watchVideo = asyncHandler(async (req, res) => {
+    const { videoId } = req.params;
+    const userId = req.user?._id;
+
+    if (!userId) {
+        throw new ApiError(401, "Unauthorized Request");
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+
+    const alreadyWatched = user.watchHistory.includes(videoId);
+
+    if (!alreadyWatched){
+        user.watchHistory.push(videoId);
+        await user.save();
+
+        const video = await Video.findById(videoId);
+        if (!video){
+            throw new ApiError(404, "Video not found");
+        }
+
+        video.views += 1;
+        await video.save();
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "Watch recorded"));
+});
+
+
+
+
 export {
     getAllVideos,
     publishAVideo,
     getVideoById,
     updateVideo,
     deleteVideo,
-    togglePublishStatus
+    togglePublishStatus,
+    watchVideo
 }

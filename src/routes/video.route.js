@@ -8,7 +8,8 @@ import {
     getVideoById,
     updateVideo,
     deleteVideo,
-    togglePublishStatus
+    togglePublishStatus,
+    watchVideo
 } from "../controllers/video.controller.js"
 
 const router = Router();
@@ -22,5 +23,6 @@ router.route("/get-video/:videoId").get(verifyJWT, getVideoById);
 router.route("/update-video/:videoId").post(verifyJWT, upload.single("thumbnail"), updateVideo);
 router.route("/delete-video/:videoId").delete(verifyJWT, deleteVideo);
 router.route("/toogle-publish-status/:videoId").post(verifyJWT, togglePublishStatus);
+router.route("/watch-video/:videoId").post(verifyJWT, watchVideo);
 
 export default router;

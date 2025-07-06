@@ -8,7 +8,7 @@ import {
 const router = Router();
 
 router.route("/get-channel-stats").get(verifyJWT, getChannelStats)
-router.route("/get-channel-video").get(verifyJWT, getChannelVideos)
+router.route("/get-channel-videos").get(verifyJWT, getChannelVideos)
 
 
 export default router;
