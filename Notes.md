@@ -1,6 +1,18 @@
-# Developer Notes
+# <p align="center">Developer Notes</p>
 
+***“This project was built as a learning journey to dive deep into backend development using Node.js, Express and MongoDB (Mongoose). Each feature was carefully implemented to mirror real-world backend architecture and best practices.”***
 
+<br><br><br>
+## <p align="center">📦 Project Structure</p>
+src/ <br>
+├── controllers/ <br>
+├── models/ <br>
+├── routes/ <br>
+├── middleware/ <br>
+├── utils/ <br>
+├── index.js
+<br><br><br>
+   
 ## <p align="center">📦 Installing Development-Only Dependencies</p>
 
 
@@ -68,26 +80,27 @@ const connectDB = async () => {
 ## <p align="center">Access Token and Refresh Token</p>
 
 
-✅ Access Token
-A short-lived token (e.g., expires in 15 minutes).
+ ### Access Token
+> A short-lived token (e.g., expires in 15 minutes).
+ 
+> Sent with each request to access protected resources (APIs).  
 
-Sent with each request to access protected resources (APIs).
+> Usually stored in memory or a secure cookie.  
 
-Usually stored in memory or a secure cookie.
+> Contains user data (claims) like user ID, email, role, etc.  
 
-Contains user data (claims) like user ID, email, role, etc.
+> If expired, user must use a refresh token to get a new one.  
 
-If expired, user must use a refresh token to get a new one.
+### Refresh Token
+> A long-lived token (e.g., expires in 7 days or more).
 
-✅ Refresh Token
-A long-lived token (e.g., expires in 7 days or more).
+> Not sent on every request — only used to get a new access token.
 
-Not sent on every request — only used to get a new access token.
+> Usually stored in an HTTP-only cookie or secure storage.
 
-Usually stored in an HTTP-only cookie or secure storage.
+> Only contains the user ID, for security.
 
-Only contains the user ID, for security.
-
+<br><br>
 ```js
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign(
@@ -153,7 +166,7 @@ Internally:**
 
 <br><br><br>
 ## <p align="center">HTTP Headers</p>
-**1.Request Header - from client  
+**1. Request Header - from client  
 2. Response header - from server  
 3. Representation header - encoding/compression  
 4. Playload header - data**
@@ -170,6 +183,7 @@ Internally:**
 | HEAD   | Same as GET, but only returns headers — no body  |
 | OPTIONS    |  Returns the allowed HTTP methods for a resource (CORS preflight)  |
 |  TRACE  | Debugging — echoes back the received request |
+
 <br><br>
 ## <p align="center">🌐 HTTP Status Codes Cheat Sheet</p>  
 
